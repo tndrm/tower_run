@@ -54,7 +54,6 @@ public class Tower : MonoBehaviour
 		{
 			if (!human.GetComponent<Rigidbody>())
 			{
-				Debug.Log(collisionPoint);
 				Rigidbody humanRigidBody = human.gameObject.AddComponent<Rigidbody>();
 				humanRigidBody.useGravity = true;
 				humanRigidBody.AddExplosionForce(1000f, human.transform.position + Random.insideUnitSphere * 5f, 5f, 3.0f);

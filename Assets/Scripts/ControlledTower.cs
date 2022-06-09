@@ -28,7 +28,6 @@ public class ControlledTower : MonoBehaviour
 				List<Human> collectedHumans = collisionTower.HumanCollect(_footFixationPoint, _fixationMaxDistance);
 				if (collectedHumans != null)
 				{
-					Debug.Log(collectedHumans.Count);
 					for (int i = collectedHumans.Count - 1; i >= 0; i--)
 					{
 						InsertHuman(collectedHumans[i]);
