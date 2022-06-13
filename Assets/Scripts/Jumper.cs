@@ -44,33 +44,3 @@ public class Jumper : MonoBehaviour
 		_jumpForce = _defaultJumpForce;
 	}
 }
-
-/*
- Todo
-a) create jump booster
-	+ 1. save to git 
-	+ 2. create prefab
-	3. create collider
-	4. check collision human-booster (on trigger)
-	5. create function busted jump
-	6. test
-	7. add boosters cenerator to level creator
-	8. test
-	9. save to git
-
-b) create obstacle
-	1. save to git
-	2. create prefabe
-	3. add collider
-	4. check collision
-	5. function removing humans from tower
-	6. test
-	7. add obstacles generator to level creator
-	8. test
-	9. save to git
- 
-c) fix:
-	1. human positions in played tower
-	2. change humans parent after destrow towers to prevent double collision
- 
- */

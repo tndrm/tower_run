@@ -48,7 +48,7 @@ public class Tower : MonoBehaviour
 		return Vector3.Distance(humanFixationPointY, footFixationPointY);
 	}
 
-	public void Break(Vector3 collisionPoint)
+	public void Break()
 	{
 		foreach (var human in _humansInTower)
 		{
@@ -58,7 +58,6 @@ public class Tower : MonoBehaviour
 				humanRigidBody.useGravity = true;
 				humanRigidBody.AddExplosionForce(1000f, human.transform.position + Random.insideUnitSphere * 5f, 5f, 3.0f);
 			}
-
 		}
 		Invoke("DestroyTower", 1f);
 	}

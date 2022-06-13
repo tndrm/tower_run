@@ -21,42 +21,55 @@ public class ControlledTower : MonoBehaviour
 	{
 		if (collision.gameObject.TryGetComponent(out Human human))
 		{
+			HandleCollisionWithTower(human);
+		}
+		if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
+		{
+			HandleCollisionWithObstacle(obstacle);
+		}
+	}
 
-			Tower collisionTower = human.GetComponentInParent<Tower>();
-			if (collisionTower)
+	private void HandleCollisionWithObstacle(Obstacle obstacle)
+	{
+
+	}
+
+	private void HandleCollisionWithTower(Human human)
+	{
+		Tower collisionTower = human.GetComponentInParent<Tower>();
+		if (collisionTower)
+		{
+			List<Human> collectedHumans = collisionTower.HumanCollect(_footFixationPoint, _fixationMaxDistance);
+			if (collectedHumans != null)
 			{
-				List<Human> collectedHumans = collisionTower.HumanCollect(_footFixationPoint, _fixationMaxDistance);
-				if (collectedHumans != null)
+				for (int i = collectedHumans.Count - 1; i >= 0; i--)
 				{
-					for (int i = collectedHumans.Count - 1; i >= 0; i--)
-					{
-						InsertHuman(collectedHumans[i]);
-						MoveDownFootFixationPoint(collectedHumans[i]);
-					}
-					MoveDownTowerCheckCollaider();
+					InsertHuman(collectedHumans[i]);
 				}
-				collisionTower.Break(collision.contacts[0].point);
+				MoveDownFootFixationPoint();
+				MoveDownTowerCheckCollaider();
 			}
-
+			collisionTower.Break();
 		}
 	}
 
 	private void InsertHuman(Human insertedHuman)
 	{
 		_humans.Insert(0, insertedHuman);
-		ResetHumanPosirion(insertedHuman);
+		ResetHumanPosition(insertedHuman);
 	}
 
-	private void ResetHumanPosirion(Human human)
+	private void ResetHumanPosition(Human human)
 	{
 		human.transform.parent = transform;
 		human.transform.localPosition = new Vector3(0, human.transform.localPosition.y, 0);
 		human.transform.localRotation = Quaternion.identity;
 	}
-	private void MoveDownFootFixationPoint(Human human)
+	private void MoveDownFootFixationPoint()
 	{
 		Vector3 footFixationPointNewPosition = _footFixationPoint.position;
-		footFixationPointNewPosition.y -= human.fixationPoint.transform.position.y;
+		Vector3 TowerMinPointPosition = _humans[0].GetComponent<Collider>().bounds.min;
+		footFixationPointNewPosition.y = TowerMinPointPosition.y;
 		_footFixationPoint.position = footFixationPointNewPosition;
 	}
 
@@ -65,3 +78,21 @@ public class ControlledTower : MonoBehaviour
 		_checkCollaider.center = _footFixationPoint.localPosition;
 	}
 }
+
+/*
+ Todo
+
+b) create obstacle
+	2. create prefabe
+	3. add collider
+	4. check collision
+	5. function removing humans from tower
+	6. test
+	7. add obstacles generator to level creator
+	8. test
+	9. save to git
+ 
+c) fix:
+	1. human positions in played tower
+	2. change humans parent after destrow towers to prevent double collision
+ */
