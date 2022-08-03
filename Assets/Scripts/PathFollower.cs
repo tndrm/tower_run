@@ -17,8 +17,6 @@ public class PathFollower : MonoBehaviour
 	{
 		_rigidbody = GetComponent<Rigidbody>();
 		_rigidbody.MovePosition(_pathCreator.path.GetPointAtDistance(_distanceTraveled));
-
-		transform.Rotate(0, 0, -90);
 	}
 
 	private void Update()
@@ -27,7 +25,10 @@ public class PathFollower : MonoBehaviour
 		Vector3 nextPoint = _pathCreator.path.GetPointAtDistance(_distanceTraveled, EndOfPathInstruction.Loop);
 		nextPoint.y = _rigidbody.position.y;
 
-		_rigidbody.rotation = _pathCreator.path.GetRotationAtDistance(_distanceTraveled);
+		Vector3 rotationVector = _pathCreator.path.GetRotationAtDistance(_distanceTraveled).eulerAngles;
+		rotationVector.z = 0;
+
+		_rigidbody.rotation = Quaternion.Euler(rotationVector);
 		_rigidbody.MovePosition(nextPoint);
 	}
 }

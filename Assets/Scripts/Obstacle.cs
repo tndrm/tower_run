@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-	[SerializeField] GameObject ObstacleTopPoint;
+	[SerializeField] GameObject ObstacleCrushPoint;
+
+	public float GetCrushPointPositionY()
+	{
+		return ObstacleCrushPoint.transform.position.y;
+	}
 }

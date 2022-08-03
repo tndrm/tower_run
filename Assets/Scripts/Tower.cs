@@ -52,12 +52,7 @@ public class Tower : MonoBehaviour
 	{
 		foreach (var human in _humansInTower)
 		{
-			if (!human.GetComponent<Rigidbody>())
-			{
-				Rigidbody humanRigidBody = human.gameObject.AddComponent<Rigidbody>();
-				humanRigidBody.useGravity = true;
-				humanRigidBody.AddExplosionForce(1000f, human.transform.position + Random.insideUnitSphere * 5f, 5f, 3.0f);
-			}
+			human.FallDown();
 		}
 		Invoke("DestroyTower", 1f);
 	}
