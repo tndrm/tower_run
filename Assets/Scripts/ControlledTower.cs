@@ -29,7 +29,6 @@ public class ControlledTower : MonoBehaviour
 			if(Time.fixedTime - lastCollisionTime < 2f) Debug.LogError("double collision!"); //Check double collision
 			lastCollisionTime = Time.fixedTime;
 			
-			//https://forum.unity.com/threads/oncollisionenter-getting-called-twice.1110599/ about twin collision
 			HandleCollisionWithObstacle(obstacle);
 		}
 	}
@@ -41,7 +40,7 @@ public class ControlledTower : MonoBehaviour
 		int lastCrashedHumanIndex = _humans.FindLastIndex(human => obstacleCrushPointY > human.GetBottomBoundsPositionY());
 		if (lastCrashedHumanIndex + 1 == _humans.Count)
 		{
-			//Debug.Log("You loose"); //TODO feat: Create loosescreen
+			Debug.Log("You loose"); //TODO feat: Create loosescreen
 		}
 		else
 		{
@@ -107,16 +106,6 @@ public class ControlledTower : MonoBehaviour
 
 /*
  Todo
-
-b) create obstacle
-	2. create prefabe
-	3. add collider
-	4. check collision
-	5. function removing humans from tower
-	6. test
-	7. add obstacles generator to level creator
-	8. test
-	9. save to git
  
 c) fix:
 	1. human positions in played tower
