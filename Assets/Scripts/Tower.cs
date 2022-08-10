@@ -22,7 +22,7 @@ public class Tower : MonoBehaviour
 		for (int i = 0; i < quantityInTower; i++)
 		{
 			Human spawnHuman = _humansTemplates[Random.Range(0, _humansTemplates.Length)];
-			_humansInTower.Add(Instantiate(spawnHuman, spawnPoint, Quaternion.identity, transform));
+			_humansInTower.Add(Instantiate(spawnHuman, spawnPoint, Quaternion.Normalize(transform.rotation), transform));
 			spawnPoint = _humansInTower[i].fixationPoint.position;
 		}
 	}

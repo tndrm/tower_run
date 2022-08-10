@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _humansTemplates:
-  - {fileID: 5321124683045463989, guid: 6107e884397b5d541a7aff8f2fd7b53d, type: 3}
+  - {fileID: 1738987650699067904, guid: 6107e884397b5d541a7aff8f2fd7b53d, type: 3}
   _humansInTowerRange: {x: 1, y: 6}

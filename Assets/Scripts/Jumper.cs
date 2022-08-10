@@ -21,6 +21,7 @@ public class Jumper : MonoBehaviour
 		{
 			_isOnGraund = false;
 			_rigitBody.AddForce(Vector3.up * _jumpForce);
+
 		}
 	}
 

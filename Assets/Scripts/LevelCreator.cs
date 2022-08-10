@@ -44,7 +44,11 @@ public class LevelCreator : MonoBehaviour
 			Booster booster = _boosterTemplates[Random.Range(0, _boosterTemplates.Count)];
 			distanceFromStart += maxDistanseBetweenTowers;
 			towerSpawnPoint = _pathCreator.path.GetPointAtDistance(distanceFromStart, EndOfPathInstruction.Stop);
-			Instantiate(_towerTemplate, towerSpawnPoint, Quaternion.identity);
+
+			Vector3 towerRotationVector = _pathCreator.path.GetRotationAtDistance(distanceFromStart).eulerAngles;
+			towerRotationVector.z = 0;
+			Instantiate(_towerTemplate, towerSpawnPoint, Quaternion.Euler(towerRotationVector));
+
 			Vector3 boosterSpawnPoint = _pathCreator.path.GetPointAtDistance(distanceFromStart - booster.distanceToTower);
 			Instantiate(booster, boosterSpawnPoint, Quaternion.identity);
 		}

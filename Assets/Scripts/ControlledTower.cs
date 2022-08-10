@@ -16,6 +16,7 @@ public class ControlledTower : MonoBehaviour
 		_humans = new List<Human>();
 		Vector3 spawnPoint = transform.position;
 		_humans.Add(Instantiate(_startHuman, spawnPoint, Quaternion.identity, transform));
+		_humans[0].StartRunAnimation();
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -40,6 +41,7 @@ public class ControlledTower : MonoBehaviour
 		int lastCrashedHumanIndex = _humans.FindLastIndex(human => obstacleCrushPointY > human.GetBottomBoundsPositionY());
 		if (lastCrashedHumanIndex + 1 == _humans.Count)
 		{
+			_humans[0].StopRunAnimation();
 			Debug.Log("You loose"); //TODO feat: Create loosescreen
 		}
 		else
@@ -48,6 +50,8 @@ public class ControlledTower : MonoBehaviour
 			{//TODO fix: the order in the tower should be the same the list
 				RemoveHuman(_humans[i]);
 			}
+			_humans[0].StartRunAnimation();
+
 		}
 		MoveFootFixationPoint();
 		MoveTowerCheckCollaider();
@@ -61,12 +65,14 @@ public class ControlledTower : MonoBehaviour
 			List<Human> collectedHumans = collisionTower.HumanCollect(_footFixationPoint, _fixationMaxDistance);
 			if (collectedHumans != null)
 			{
+				_humans[0].StopRunAnimation();
 				for (int i = collectedHumans.Count - 1; i >= 0; i--)
 				{
 					InsertHuman(collectedHumans[i]);
 				}
 				MoveFootFixationPoint();
 				MoveTowerCheckCollaider();
+				_humans[0].StartRunAnimation();
 			}
 			collisionTower.Break();
 		}
@@ -106,6 +112,14 @@ public class ControlledTower : MonoBehaviour
 
 /*
  Todo
+a) show run animation:
+	1. show run animation
+	2. after collision with tower move animation to down human
+	3. add animations to all homans in tower
+	4. fix look rotation people in tower
+
+b) feat:
+	1. show jump animation
  
 c) fix:
 	1. human positions in played tower
